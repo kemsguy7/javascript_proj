@@ -16,7 +16,6 @@ export default function Accordion() {
   function handleMultiSelection(getCurrentId) {
     let cpyMultiple = [...multiple]
     const findIndexOfCurrentId = cpyMultiple.indexOf(getCurrentId)
-
     console.log(findIndexOfCurrentId)
     if (findIndexOfCurrentId === -1) cpyMultiple.push(getCurrentId)
     else cpyMultiple.splice(findIndexOfCurrentId, 1)
@@ -45,13 +44,20 @@ export default function Accordion() {
                 <h3> {dataItem.question} </h3>
                 <span> + </span>
               </div>
-              {selected === dataItem.id ? (
+              {enableMultiSelection
+                ? multiple.indexOf(dataItem.id) !== -1 && (
+                    <div className="content">{dataItem.answer} </div>
+                  )
+                : selected === dataItem.id && (
+                    <div className="content"> {dataItem.answer}</div>
+                  )}
+              {/* {selected === dataItem.id ? (
                 <div className="content">{dataItem.answer}</div>
               ) : (
                 <div className="content" style={{ display: 'none' }}>
                   {dataItem.answer}
                 </div>
-              )}
+              )} */}
             </div>
           ))
         ) : (
