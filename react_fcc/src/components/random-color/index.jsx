@@ -18,12 +18,13 @@ export default function RandomColor() {
     }
     setColor(hexColor)
   }
+
   function handleCreateRandomRgbColor() {
     const r = randomColorUtility(256)
     const g = randomColorUtility(256)
     const b = randomColorUtility(256)
 
-    setColor(`rgb ${r}, ${g}, ${b}`)
+    setColor(`rgb(${r},${g}, ${b})`)
   }
 
   useEffect(() => {
