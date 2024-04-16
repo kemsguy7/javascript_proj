@@ -15,7 +15,7 @@ export default function StarRating({ noOfStars = 5 }) {
   }
 
   function handleMouseLeave() {
-    setHover(rating)
+    setHover(rating) //set the yello color to stop at the item being hovered on.
   }
 
   return (
