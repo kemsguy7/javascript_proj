@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-export default function ImageSlider({ url, limit }) {
+export default function ImageSlider({ url, limit = 5, page = 1 }) {
   const [images, setImages] = useState([])
   const [currentSlide, setCurrentSlide] = useState(0)
   const [errorMsg, setErrorMsg] = useState(null)
@@ -10,7 +10,7 @@ export default function ImageSlider({ url, limit }) {
     try {
       setLoading(true) // before getting data, set loading to true
 
-      const response = await fetch(getUrl)
+      const response = await fetch(`${getUrl}?page=${page}&limit=${limit}`)
       const data = await response.json()
 
       if (data) {
@@ -25,6 +25,8 @@ export default function ImageSlider({ url, limit }) {
   useEffect(() => {
     if (url !== '') fetchImages(url)
   }, [url])
+
+  console.log(images)
 
   if (loading) {
     return <div className="container"> Loading data ! Please Wait ...</div>
