@@ -24,6 +24,14 @@ export default function ImageSlider({ url, limit = 5, page = 1 }) {
     }
   }
 
+  function handlePrevious() {
+    setCurrentSlide(currentSlide === 0 ? images.length - 1 : currentSlide - 1) // if the current slide is 0, then set it to the last slide else decrement it by 1
+  }
+
+  function handleNext() {
+    setCurrentSlide(currentSlide ==== images.length - 1 ? 0: currentSlide + 1) // if the current slide is at the last slide, go abck to the first slide, else increment it by 1
+  }
+
   useEffect(() => {
     if (url !== '') fetchImages(url)
   }, [url])
@@ -40,7 +48,10 @@ export default function ImageSlider({ url, limit = 5, page = 1 }) {
 
   return (
     <div className="container">
-      <BsArrowLeftCircleFill className="arrow arrow-left" />
+      <BsArrowLeftCircleFill
+        onClick={handlePrevious}
+        className="arrow arrow-left"
+      />
       {images && images.length
         ? images.map((imageItem) => (
             <img
@@ -51,7 +62,10 @@ export default function ImageSlider({ url, limit = 5, page = 1 }) {
             />
           ))
         : null}
-      <BsArrowRightCircleFill className="arrow arrow-right" />
+      <BsArrowRightCircleFill
+        onClick={handleNext}
+        className="arrow arrow-right"
+      />
       <span className="circle-indicators">
         {images && images.length
           ? images.map((_, index) => (
