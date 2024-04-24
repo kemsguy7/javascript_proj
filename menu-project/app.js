@@ -93,8 +93,13 @@ filterBtns.forEach(function (btn) {
             return menuItem;
            }
              
-       });
-       console.log(menuCategory);  
+       }); 
+      //  console.log(menuCategory);  
+      if(category === 'all') {
+         displayMenuItems(menu)   //display all items if the cateogry is all
+      } else {
+        displayMenuItems(menuCategory);  //display items based on the category
+      }
     });
 });
  
