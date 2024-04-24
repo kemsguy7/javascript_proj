@@ -77,31 +77,38 @@ const sectionCenter = document.querySelector(".section-center");
 
 
 window.addEventListener("DOMContentLoaded", function () { 
-   let displayMenu = menu.map(function (item) {
-    console.log(item); 
-
-    return `<article class="menu-item">
-        <img src=${item.img} class="photo" alt=${item.title} 
-        />
-        <div class="item-info">
-            <header> 
-                <h4>${item.title} </h4>
-                <h4 class="price">$${item.price}</h4>
-            </header>
-            <p class="item-text">
-                lorem ipsum dolor sit amet consectetur adipisicing elit.
-                lorem ipsum dolor sit amet consectetur adipisicing elit.
-                lorem ipsum dolor sit amet consectetur adipisicing elit.
-                lorem ipsum dolor sit amet consectetur adipisicing elit.                            
-            </p>
-        </div>     
-        </article>
-    `
-   });
-   displayMenu = displayMenu.join("");
-   sectionCenter.innerHTML = displayMenu;  //add the dynamically generated html to the sectionCenter div
-   console.log(displayMenu);
+   displayMenuItems(menu);
 }); 
+
+
+//function to set up filtering
+function displayMenuItems(menuItems) {
+    let displayMenu = menuItems.map(function (item) {
+        console.log(item); 
+    
+        return `<article class="menu-item">
+            <img src=${item.img} class="photo" alt=${item.title} 
+            />
+            <div class="item-info">
+                <header> 
+                    <h4>${item.title} </h4>
+                    <h4 class="price">$${item.price}</h4>
+                </header>
+                <p class="item-text">
+                    lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    lorem ipsum dolor sit amet consectetur adipisicing elit.                            
+                </p>
+            </div>     
+            </article>
+        `
+       });
+       displayMenu = displayMenu.join("");
+       sectionCenter.innerHTML = displayMenu;  //add the dynamically generated html to the sectionCenter div
+   
+}
+
 
 
 //   const sectionCenter = document.querySelector(".section-center");
