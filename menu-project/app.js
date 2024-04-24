@@ -98,6 +98,8 @@ window.addEventListener("DOMContentLoaded", function () {
         </article>
     `
    });
+   displayMenu = displayMenu.join("");
+   sectionCenter.innerHTML = displayMenu;  //add the dynamically generated html to the sectionCenter div
    console.log(displayMenu);
 }); 
 
