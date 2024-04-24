@@ -1,3 +1,8 @@
+// get only unique categories - HARDEST ONE
+// iterate over categories return buttons
+// make sure to select butttons when they are available
+
+
 const menu = [
     {
       id: 1,
@@ -80,6 +85,16 @@ const filterBtns = document.querySelectorAll('.filter-btn');
 //load items on page load
 window.addEventListener("DOMContentLoaded", function () { 
    displayMenuItems(menu);
+   const categories = menu.reduce(function (values, item)  {
+    if (!values.includes(item.category)) {
+        values.push(item.category);
+    }
+    return values;
+   }, ['all']); // add all to the categories array 
+   const categoryBtns = categories.map(function (category) {
+    return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`;
+   }).join("");
+   console.log(categoryBtns);
 }); 
 
 
@@ -107,7 +122,7 @@ filterBtns.forEach(function (btn) {
 //function to set up filtering
 function displayMenuItems(menuItems) {
     let displayMenu = menuItems.map(function (item) {
-        console.log(item); 
+      
     
         return `<article class="menu-item">
             <img src=${item.img} class="photo" alt=${item.title} 
@@ -129,7 +144,6 @@ function displayMenuItems(menuItems) {
        });
        displayMenu = displayMenu.join("");
        sectionCenter.innerHTML = displayMenu;  //add the dynamically generated html to the sectionCenter div
-   
 }
 
 
