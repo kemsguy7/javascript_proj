@@ -85,46 +85,7 @@ const display = {}
 //load items on page load
 window.addEventListener('DOMContentLoaded', function () {
   displayMenuItems(menu)
-  const categories = menu.reduce(
-    function (values, item) {
-      display.val = values
-      display.item = item
-
-      if (!values.includes(item.category)) {
-        display.category = item.category
-        values.push(item.category)
-      }
-      console.log(display)
-      return values
-    },
-    ['all']
-  ) // add all to the categories array
-  const categoryBtns = categories
-    .map(function (category) {
-      return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`
-    })
-    .join('')
-  container.innerHTML = categoryBtns
-  const filterBtns = document.querySelectorAll('.filter-btn')
-
-  // filter items
-  filterBtns.forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      const category = e.currentTarget.dataset.id
-      const menuCategory = menu.filter(function (menuItem) {
-        // console.log(menuItem.category);
-        if (menuItem.category === category) {
-          return menuItem
-        }
-      })
-      //  console.log(menuCategory);
-      if (category === 'all') {
-        displayMenuItems(menu) //display all items if the cateogry is all
-      } else {
-        displayMenuItems(menuCategory) //display items based on the category
-      }
-    })
-  })
+  displayMenuButtons() // call the function to display the buttons
 })
 
 //function to set up filtering
@@ -152,27 +113,45 @@ function displayMenuItems(menuItems) {
   sectionCenter.innerHTML = displayMenu //add the dynamically generated html to the sectionCenter div
 }
 
-//   const sectionCenter = document.querySelector(".section-center");
+function displayMenuButtons() {
+  const categories = menu.reduce(
+    function (values, item) {
+      display.val = values
+      display.item = item
 
-//   window.addEventListener("DOMContentLoaded", function () {
-//     let displayMenu = menu.map(function (item) {
-//       // console.log(item);
+      if (!values.includes(item.category)) {
+        display.category = item.category
+        values.push(item.category)
+      }
+      console.log(display)
+      return values
+    },
+    ['all']
+  ) // add all to the categories array
+  const categoryBtns = categories
+    .map(function (category) {
+      return `<button class="filter-btn" type="button" data-id=${category}>${category}</button>`
+    })
+    .join('')
+  container.innerHTML = categoryBtns
+  const filterBtns = container.querySelectorAll('.filter-btn')
 
-//       return `<article class="menu-item">
-//             <img src=${item.img} alt=${item.title} class="photo" />
-//             <div class="item-info">
-//               <header>
-//                 <h4>${item.title}</h4>
-//                 <h4 class="price">$${item.price}</h4>
-//               </header>
-//               <p class="item-text">
-//                 ${item.desc}
-//               </p>
-//             </div>
-//           </article>`;
-//     });
-//     displayMenu = displayMenu.join("");
-//     console.log(displayMenu);
-
-//     sectionCenter.innerHTML = displayMenu;
-//   });
+  // filter items
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      const category = e.currentTarget.dataset.id
+      const menuCategory = menu.filter(function (menuItem) {
+        // console.log(menuItem.category);
+        if (menuItem.category === category) {
+          return menuItem
+        }
+      })
+      //  console.log(menuCategory);
+      if (category === 'all') {
+        displayMenuItems(menu) //display all items if the cateogry is all
+      } else {
+        displayMenuItems(menuCategory) //display items based on the category
+      }
+    })
+  })
+}
