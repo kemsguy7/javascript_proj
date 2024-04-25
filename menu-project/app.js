@@ -82,13 +82,20 @@ const sectionCenter = document.querySelector(".section-center");
 
 const filterBtns = document.querySelectorAll('.filter-btn');
 
+const display = {};
+
 //load items on page load
 window.addEventListener("DOMContentLoaded", function () { 
    displayMenuItems(menu);
    const categories = menu.reduce(function (values, item)  {
+    display.val = values;
+    display.item = item;
+    
     if (!values.includes(item.category)) {
+        display.category = item.category;
         values.push(item.category);
     }
+    console.log(display);
     return values;
    }, ['all']); // add all to the categories array 
    const categoryBtns = categories.map(function (category) {
